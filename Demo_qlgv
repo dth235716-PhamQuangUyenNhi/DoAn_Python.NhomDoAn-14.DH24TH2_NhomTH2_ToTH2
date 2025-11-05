@@ -24,7 +24,13 @@ tk.Label(frame_info,  text="Mã số").grid(row=0,  column=0,  padx=5,  pady=5, 
 entry_maso = tk.Entry(frame_info, width=10)
 entry_maso.grid(row=0, column=1, padx=5, pady=5, sticky="w")
 
-
+# Bảng danh sách giáo viên
+frame_table = tk.Frame(root)
+frame_table.pack(pady=10, padx=10, fill="both", expand=True)
                 
 
+<<<<<<< HEAD
 root.mainloop()
+=======
+root.mainloop()
+>>>>>>> 72b056b1981dea40956e5d080f1abf9ae7ecad94
