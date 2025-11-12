@@ -7,7 +7,7 @@ except Exception:
   DateEntry = None
 
 
-def center_window(win, w=300, h=600):
+def center_window(win, w=700, h=500):
   ws = win.winfo_screenwidth()
   hs = win.winfo_screenheight()
   x = (ws // 2) - (w // 2)
@@ -18,7 +18,7 @@ def center_window(win, w=300, h=600):
 def main():
   root = tk.Tk()
   root.title("Quản lý giáo viên phổ thông")
-  center_window(root, 500, 300)
+  center_window(root, 700, 500)
   root.resizable(False, False)
 
   # Tiêu đề
