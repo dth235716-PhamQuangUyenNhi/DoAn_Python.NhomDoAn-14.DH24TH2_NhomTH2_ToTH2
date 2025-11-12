@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import form_trangchu
 
 # căn giữa cửa sổ
 def center_window(win, w=300, h=600):
@@ -31,12 +32,6 @@ def main():
   tk.Label(frm_input, text="Mật khẩu:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
   txt_pass = tk.Entry(frm_input, width=25, show="*")
   txt_pass.grid(row=1, column=1, padx=5, pady=5)
-
-  # Nút đăng nhập
-  btn_login = tk.Button(dangnhap, text="Đăng nhập", width=12, command=login_action)
-  btn_login.pack(pady=10)
-
-
   # Hàm xử lý sự kiện đăng nhập
   def login_action():
         username = txt_user.get()
@@ -45,9 +40,13 @@ def main():
         if username == "admin" and password == "123":
             messagebox.showinfo("Thông báo", "Đăng nhập thành công!")
             dangnhap.destroy()  # Đóng cửa sổ đăng nhập
-            # Ở đây bạn có thể mở cửa sổ chính của ứng dụng
+            form_trangchu.main()  # Mở form trang chủ
         else:
             messagebox.showerror("Lỗi", "Tài khoản hoặc mật khẩu không đúng!")
+  # Nút đăng nhập
+  btn_login = tk.Button(dangnhap, text="Đăng nhập", width=12, command = login_action)
+  btn_login.pack(pady=10)
+  
   dangnhap.mainloop()
 
 if __name__ == "__main__":
