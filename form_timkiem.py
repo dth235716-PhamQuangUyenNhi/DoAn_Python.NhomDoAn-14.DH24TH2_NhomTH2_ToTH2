@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox
 import form_trangchu
 
 # căn giữa cửa sổ
-def center_window(win, w=300, h=600):
+def center_window(win, w=300, h=200):
   ws = win.winfo_screenwidth()
   hs = win.winfo_screenheight()
   x = (ws // 2) - (w // 2)
@@ -28,21 +28,30 @@ def main():
   txt_tkgv = tk.Entry(frm_input, width=25)
   txt_tkgv.grid(row=0, column=1, padx=5, pady=5)
 
+ 
   # Hàm xử lý sự kiện đăng nhập
   def login_action():
-        username = txt_user.get()
+        username = "admin"
         # Kiểm tra mã số của giáo viên
-        if username == "admin" and password == "123": #viết code lại tìm mã số
+        if username == "admin": #viết code lại tìm
             form_trangchu.main()  # Mở form ket qua gv
         else:
             messagebox.showerror("Không có giáo viên nào có mã số này!")
-  # Nút tìm
-  btn_tim = tk.Button(timkiem, text="Tìm kiếm", width=12, command = login_action)
-  btn_tim.pack(pady=10)
 
+ # Hàm thoát về form_trangchu
+  def thoat_action():
+        timkiem.destroy()  # đóng cửa sổ hiện tại
+        form_trangchu.main()
+
+  # Frame chứa nút
+  frame_buttons = tk.Frame(timkiem)
+  frame_buttons.pack(pady=10)
+  # Nút tìm
+  btn_tim = tk.Button(frame_buttons, text="Tìm kiếm", width=10, command = login_action)
+  btn_tim.pack(side= 'left', padx=10)
   # Nút thoát
-  btn_thoat = tk.Button(timkiem, text="Thoát", width=12, command = login_action)
-  btn_thoat.pack(pady=10)
+  btn_thoat = tk.Button(frame_buttons, text="Thoát", width=10, command = thoat_action)
+  btn_thoat.pack(side= 'left', padx=10)
   
   timkiem.mainloop()
 

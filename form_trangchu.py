@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import DEMO_CT_QLGVPT
+import form_timkiem
+import form_phancong
 
 # căn giữa cửa sổ
 def center_window(win, w=300, h=600):
@@ -38,16 +40,23 @@ def main():
   btn_bomon = tk.Button(frame_buttons, text="Thông tin bo mon", width=15, command=xem_thong_tin_giaovien)
   btn_bomon.pack(side="left", padx=5)
 
+
+  def tim_giaovien():
+    form_timkiem.main()  # Mở form tim kiếm giáo viên
+
+  def Lich_phancong():
+    form_phancong.main()  # Mở form phân công
+
   # Nút 4: "tìm kiếm giáo viên"
-  btn_tkgiaovien = tk.Button(frame_buttons, text="Tìm kiếm giáo viên", width=15, command=xem_thong_tin_giaovien)
+  btn_tkgiaovien = tk.Button(frame_buttons, text="Tìm kiếm giáo viên", width=15, command=tim_giaovien)
   btn_tkgiaovien.pack(side="left", padx=5)
 
    # Nút 4: "lịch phân công"
-  btn_phancong = tk.Button(frame_buttons, text="Lịch phân công", width=15, command=xem_thong_tin_giaovien)
+  btn_phancong = tk.Button(frame_buttons, text="Lịch phân công", width=15, command=Lich_phancong)
   btn_phancong.pack(side="left", padx=5)
 
   # Nút thoát
-  btn_thoat = tk.Button(trangchu, text="Thoat", width=10, command=xem_thong_tin_giaovien)
+  btn_thoat = tk.Button(trangchu, text="Thoat", width=10, command=quit)
   btn_thoat.pack(side = 'bottom', anchor= "e", padx=10, pady=10)
 
   trangchu.mainloop()

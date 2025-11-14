@@ -38,7 +38,6 @@ def main():
         password = txt_pass.get()
         # Kiểm tra tài khoản và mật khẩu (ví dụ đơn giản)
         if username == "admin" and password == "123":
-            messagebox.showinfo("Thông báo", "Đăng nhập thành công!")
             dangnhap.destroy()  # Đóng cửa sổ đăng nhập
             form_trangchu.main()  # Mở form trang chủ
         else:
