@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import DEMO_CT_QLGVPT
+import form_thongtingiaovien
 import form_timkiem
 import form_phancong
 import form_thongtinbomon
@@ -31,7 +31,7 @@ def main():
   btn_trangchu.pack(side="left", padx=5)
 
   def xem_thong_tin_giaovien():
-    DEMO_CT_QLGVPT.main()  # Mở form trang chủ
+    form_thongtingiaovien.main()  # Mở form thông tin giáo viên
 
   # Nút 2: "Xem thông tin giáo viên"
   btn_giaovien = tk.Button(frame_buttons, text="Thông tin giáo viên", width=15, command=xem_thong_tin_giaovien)
