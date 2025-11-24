@@ -22,13 +22,17 @@ def center_window(win, w=700, h=400):
 
 
 # ----------------  GIAO DIỆN CHÍNH ----------------
-def main():
-  thongtinbomon = tk.Tk()
-  thongtinbomon.title("Đăng nhập hệ thống")
+def main(role):
+  thongtinbomon = tk.Toplevel()
+  thongtinbomon.title("Hệ thống quản lý giáo viên phổ thông")
   center_window(thongtinbomon, 700, 400)
   thongtinbomon.resizable(False, False)
+
+  #Phân quyền
+  is_admin = (role == "Admin")
+
   # Giao diện đăng nhập 
-  lbl_title = tk.Label(thongtinbomon, text="Thông tin bộ môn", font=("Arial", 14, "bold"))
+  lbl_title = tk.Label(thongtinbomon, text="Thông tin bộ môn", font=("Times New Roman", 14, "bold"))
   lbl_title.pack(pady=10)
 
   # Frame nhập thông tin
@@ -105,6 +109,7 @@ def main():
         entry_sdt.insert(0, values[4])
         entry_email.delete(0, tk.END)
         entry_email.insert(0, values[5])
+
   # ---------------- HÀM THÊM DỮ LIỆU ----------------
   def add_data():
     mato = entry_mato.get()
@@ -224,22 +229,31 @@ def main():
 
    # ---------------- HÀM THOÁT ----------------
   def thoat_action():
-        thongtinbomon.destroy()  # đóng cửa sổ hiện tại
-        form_trangchu.main()
+    thongtinbomon.destroy()
+    form_trangchu.HomeForm(role)
 
+  # ------------------------- GIAO DIỆN -----------------------------
   # Frame nút chức năng
   frm_btn = tk.Frame(thongtinbomon)
   frm_btn.pack(pady=10)
 
-  tk.Button(frm_btn, text="Thêm", width=12, command=add_data).grid(row=0, column=0, padx=5)
-  tk.Button(frm_btn, text="Lưu", width=12, command=save_data).grid(row=0, column=1, padx=5)
-  tk.Button(frm_btn, text="Sửa", width=12, command=edit_data).grid(row=0, column=2, padx=5)
-  tk.Button(frm_btn, text="Hủy", width=12, command=cancel_action).grid(row=0, column=3, padx=5)
-  tk.Button(frm_btn, text="Xóa", width=12, command=delete_data).grid(row=0, column=4, padx=5)
-  tk.Button(frm_btn, text="Thoát", width=12, command=thoat_action).grid(row=0, column=5, padx=5) 
+  btn_them = tk.Button(frm_btn, text="Thêm", width=12, command=add_data)
+  btn_luu = tk.Button(frm_btn, text="Lưu", width=12, command=save_data)
+  btn_sua = tk.Button(frm_btn, text="Sửa", width=12, command=edit_data)
+  btn_huy = tk.Button(frm_btn, text="Hủy", width=12, command=cancel_action)
+  btn_xoa = tk.Button(frm_btn, text="Xóa", width=12, command=delete_data)
+  btn_thoat = tk.Button(frm_btn, text="Thoát", width=12, command=thoat_action)
 
+  # Hiển thị nút theo phân quyền
+  if is_admin:
+    btn_them.grid(row=0, column=0, padx=5)
+    btn_luu.grid(row=0, column=1, padx=5)
+    btn_sua.grid(row=0, column=2, padx=5)
+    btn_huy.grid(row=0, column=3, padx=5)
+    btn_xoa.grid(row=0, column=4, padx=5)
+  btn_thoat.grid(row=0, column=5, padx=5) 
       # Bảng danh sách giáo viên
-  lbl_ds = tk.Label(thongtinbomon, text="Tổ bộ môn", font=("Arial", 10))
+  lbl_ds = tk.Label(thongtinbomon, text="Tổ bộ môn", font=("Times New Roman", 10))
   lbl_ds.pack(pady=5, anchor="w", padx=10)
 
   columns = ("mato", "tento", "matotruong", "tentotruong","sdt", "email")
