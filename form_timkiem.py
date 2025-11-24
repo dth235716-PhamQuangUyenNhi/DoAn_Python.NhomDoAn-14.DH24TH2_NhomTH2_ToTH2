@@ -23,7 +23,7 @@ def center_window(win, w=700, h=500):
   win.geometry(f'{w}x{h}+{x}+{y}')
 
 # --------------------------- GIAO DIỆN CHÍNH ---------------------------
-def main():
+def main(role):
   timkiem = tk.Toplevel()
   timkiem.title("Đăng nhập hệ thống")
   center_window(timkiem, 300, 200)
@@ -72,13 +72,18 @@ def main():
     center_window(ttgv, 800, 700)
     ttgv.resizable(False, False)
 
+    # ---- Hàm thoát ----
+    # Hàm thoát về form_trangchu
+    def vehoptk():
+      ttgv.destroy()
+
     menubar = tk.Menu(ttgv)
     ttgv.config(menu=menubar)
 
     menu_tacvu = tk.Menu(menubar, tearoff=0)
     menubar.add_cascade(label="Tác vụ", menu=menu_tacvu)
 
-    menu_tacvu.add_command(label="Thoát", command=lambda: print("Thoát..."))
+    menu_tacvu.add_command(label="Thoát", command=vehoptk)
 
     # --------------------- CÁC HÀM CHỨC NĂNG ---------------------
     # ------------------ LOAD ẢNH --------------------------------
@@ -333,7 +338,7 @@ def main():
   # Hàm thoát về form_trangchu
   def thoat_action():
     timkiem.destroy()
-    form_trangchu.HomeForm()
+    form_trangchu.HomeForm(role)
 
   # Frame chứa nút các nút ở form tim kiếm
   frame_buttons = tk.Frame(timkiem)
