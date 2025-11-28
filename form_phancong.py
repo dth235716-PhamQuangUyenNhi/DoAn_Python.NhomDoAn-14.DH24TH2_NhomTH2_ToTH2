@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import form_trangchu
 import pyodbc
+import pandas as pd
+from tkinter import filedialog
 
 def get_connection():
   conn = pyodbc.connect(
@@ -77,7 +79,7 @@ def main(role):
     if nam is not None:
       query += " WHERE LP.NamHoc = ?"
       params.append(nam)
-    query += " ORDER BY LP.NamHoc, L.TenLop;"
+    query += " ORDER BY LP.STT, LP.NamHoc, L.TenLop;"
     cur.execute(query, params)
         
     for row in cur.fetchall():
@@ -249,10 +251,44 @@ def main(role):
   
 
   # --------------------- NÚT Ở PORM CHÍNH ---------------------
+  #--------------------- HÀM XUẤT EXCEL ---------------------
+  def export_to_excel():
+    try:
+        # Lấy dữ liệu từ treeview
+        data = []
+        for row_id in tree.get_children():
+            row = tree.item(row_id)['values']
+            data.append(row)
+
+        if not data:
+            messagebox.showwarning("Thông báo", "Không có dữ liệu để xuất!")
+            return
+
+        # Chọn nơi lưu file
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".xlsx",
+            filetypes=[("Excel files", "*.xlsx")],
+            initialfile="Lich_Phan_Cong.xlsx"
+        )
+
+        if not file_path:
+            return  # Người dùng bấm Cancel
+
+        # Xuất file
+        df = pd.DataFrame(data, columns=columns)
+        df.to_excel(file_path, index=False)
+
+        messagebox.showinfo("Thành công", f"Dữ liệu đã được xuất ra:\n{file_path}")
+
+    except Exception as e:
+        messagebox.showerror("Lỗi", f"Xuất file thất bại:\n{str(e)}")
+
+  #----------------------------------------------------------------------------------
   # Frame chứa nút ở góc dưới bên phải
   frame_buttons = tk.Frame(phancong)
   frame_buttons.pack(anchor='se', pady=10, padx=10)
 
+  btn_Xuat = tk.Button(frame_buttons, text="Xuất excel", width=10, command=export_to_excel)
   btn_them = tk.Button(frame_buttons, text="Thêm", width=10, command=Mo_form_thempc) 
   btn_xoa = tk.Button(frame_buttons, text="Xóa", width=10, command=delete_data)
   btn_thoat = tk.Button(frame_buttons, text="Thoát", width=10, command=thoat_action)
@@ -261,6 +297,7 @@ def main(role):
     btn_them.pack(side='left', padx=5)
     btn_xoa.pack(side='left', padx=5)
   btn_thoat.pack(side='left', padx=5)
+  btn_Xuat.pack(side='left', padx=5)
 
   phancong.mainloop()
 

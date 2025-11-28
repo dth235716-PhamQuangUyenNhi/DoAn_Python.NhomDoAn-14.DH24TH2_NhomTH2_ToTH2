@@ -142,6 +142,9 @@ class HomeForm:
         self.trangchu.title("Chương trình quản lý giáo viên phổ thông")
         center_window(self.trangchu, 600, 350)
 
+        self.Label = tk.Label(self.trangchu, text="Chào mừng đến với Hệ thống quản lý giáo viên trường THPT", fg="Red", font=("Times New Roman", 15, "bold"))
+        self.Label.pack(anchor="center", pady=80)
+
         # Các hàm xử lý của nút
         def xem_dsgv():
             form_thongtingiaovien.main(self.role)
@@ -155,7 +158,22 @@ class HomeForm:
         def xemphancong():
             form_phancong.main(self.role)
 
-        # Frame chứa 4 nút nằm ngang
+        # MENU BAR (dạng VS Code)
+        menubar = tk.Menu(self.trangchu)
+        self.trangchu.config(menu=menubar)
+
+        # ten menu Trang chủ
+        trangchu_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Trang chủ", menu=trangchu_menu)
+
+
+        trangchu_menu.add_command(label="Thông tin giáo viên", command=xem_dsgv)
+        trangchu_menu.add_command(label="Tổ bộ môn", command=xemtobomon)
+        trangchu_menu.add_command(label="Lịch phân công", command=xemphancong)
+        trangchu_menu.add_command(label="Tìm kiếm giáo viên", command=tim_kiem_gv)
+        trangchu_menu.add_command(label="Thoát", command=self.trangchu.destroy)
+
+        """# Frame chứa 4 nút nằm ngang
         frame_buttons = tk.Frame(self.trangchu)
         frame_buttons.pack(anchor='nw', pady=10, padx=10)
 
@@ -178,7 +196,10 @@ class HomeForm:
         # ---- NÚT THOÁT ----
         tk.Button(self.trangchu, text="Thoát", width=10, command=self.trangchu.destroy).pack(
             side="bottom", anchor="e", padx=10, pady=10
-        )
+        )"""
+
+        
+        
         self.trangchu.mainloop()
 # ------------------------- KẾT THÚC FORM TRANG CHỦ -------------------------
 

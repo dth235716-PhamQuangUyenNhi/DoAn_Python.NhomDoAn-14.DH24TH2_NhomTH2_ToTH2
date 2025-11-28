@@ -350,6 +350,7 @@ def main(role):
   btn_thoat = tk.Button(frame_buttons, text="Thoát", width=10, command = thoat_action)
   btn_thoat.pack(side= 'left', padx=10)
   
+  
   timkiem.mainloop()
 
 if __name__ == "__main__":

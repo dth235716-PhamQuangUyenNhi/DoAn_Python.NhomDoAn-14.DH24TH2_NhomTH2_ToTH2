@@ -252,6 +252,7 @@ def main(role):
     btn_huy.grid(row=0, column=3, padx=5)
     btn_xoa.grid(row=0, column=4, padx=5)
   btn_thoat.grid(row=0, column=5, padx=5) 
+    
       # Bảng danh sách giáo viên
   lbl_ds = tk.Label(thongtinbomon, text="Tổ bộ môn", font=("Times New Roman", 10))
   lbl_ds.pack(pady=5, anchor="w", padx=10)
